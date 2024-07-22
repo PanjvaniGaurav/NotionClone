@@ -1,4 +1,5 @@
 import { DocumentData } from "firebase/firestore";
+import * as Y from "yjs";
 
 export type User = {
     fullName : string,
@@ -11,4 +12,10 @@ export interface RoomDocument extends DocumentData {
     role : "owner" | "editor";
     roomId: string;
     userId: string;
+}
+
+export type EditorProps = {
+    doc : Y.Doc;
+    provider : any;
+    darkMode : boolean;
 }
