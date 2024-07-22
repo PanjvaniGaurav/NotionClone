@@ -11,8 +11,8 @@ import {
 } from "@/components/ui/dialog";
 import { FormEvent, useState, useTransition } from "react";
 import { Button } from "./ui/button";
-import { usePathname, useRouter } from "next/navigation";
-import { deleteDocument, inviteUserToDocument } from "@/actions/action";
+import { usePathname } from "next/navigation";
+import {  inviteUserToDocument } from "@/actions/action";
 import { toast } from "sonner";
 import { Input } from "./ui/input";
 
@@ -21,7 +21,6 @@ const InviteUser = () => {
   const [isPending, startTransition] = useTransition();
   const [email, setEmail] = useState("");
   const pathname = usePathname();
-  const router = useRouter();
 
   const handleInvite = (e:FormEvent) =>{
     e.preventDefault()
