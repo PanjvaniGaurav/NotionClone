@@ -1,17 +1,15 @@
 "use client";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { FormEvent, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 import { Button } from "./ui/button";
-import { deleteDocument, inviteUserToDocument, removeUserFromDocument } from "@/actions/action";
+import { removeUserFromDocument } from "@/actions/action";
 import { toast } from "sonner";
 import { useUser } from "@clerk/nextjs";
 import useOwner from "@/lib/useOwner";
@@ -67,7 +65,7 @@ const ManageUsers = () => {
                   : doc.data().userId}
               </p>
               <div className="flex items-center gap-2">
-                <Button variant="outline" disabled={true}>
+                <Button variant="ghost" disabled={true}>
                   {doc.data().role}
                 </Button>
                 {

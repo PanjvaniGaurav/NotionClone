@@ -4,6 +4,7 @@ import { doc } from "firebase/firestore"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useDocumentData } from "react-firebase-hooks/firestore"
+import LoadingSpinner from "./LoadingSpinner"
 
 const SidebarOption = ({id,href}:{id:string,href:string}) => {
   const [data,loading,error] = useDocumentData(doc(db,"documents",id ))

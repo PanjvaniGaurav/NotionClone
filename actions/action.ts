@@ -6,13 +6,13 @@ import { title } from "process";
 import { create } from "domain";
 import liveblocks from "@/lib/liveblocks";
 
-export async function createNewDocument() {
+export async function createNewDocument(docTitle:string) {
   auth().protect();
   const { sessionClaims } = await auth();
 
   const docCollectionRef = adminDb.collection("documents");
   const docRef = await docCollectionRef.add({
-    title: "New Doc",
+    title: docTitle,
   });
   await adminDb
     .collection("users")

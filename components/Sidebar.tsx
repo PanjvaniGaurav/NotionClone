@@ -15,6 +15,7 @@ import { db } from "@/firebase";
 import { useEffect, useState } from "react";
 import { RoomDocument } from "@/types/type";
 import SidebarOption from "./SidebarOption";
+import LoadingSpinner from "./LoadingSpinner";
 
 const Sidebar = () => {
   const { user } = useUser();
@@ -57,30 +58,53 @@ const Sidebar = () => {
     <>
       <NewDocumentButton />
       <div className="flex py-4 flex-col space-y-4 md:max-w-36">
-        {groupedData.owner.length === 0 ? (
-          <h2 className="text-gray-500 text-sm font-semibold">
-            No documents found
-          </h2>
-        ) : (
-          <>
+      {!loading && groupedData.owner.length === 0 && (
+          <div>
             <h2 className="text-gray-500 text-sm font-semibold">
               My Documents
             </h2>
-            {groupedData.owner.map((doc) => (
-             <SidebarOption key={doc.id} id={doc.id} href={`/doc/${doc.id}`} />
+            <p className="text-gray-500 text-xs font-semibold">
+              No documents found
+            </p>
+          </div>
+        )}
+        {!loading && groupedData.owner === null ? (
+          <div>
+            <h2 className="text-gray-500 text-sm font-semibold">
+              My Documents
+            </h2>
+            <p className="text-gray-500 text-xs font-semibold">
+              No documents found
+            </p>
+          </div>
+        ) : (
+          <>
+          {
+            (groupedData.owner.length > 0) &&
+            <h2 className="text-gray-500 text-sm font-semibold">
+              My Documents
+            </h2>
+          }
+            {!loading && groupedData.owner.map((doc) => (
+              <SidebarOption key={doc.id} id={doc.id} href={`/doc/${doc.id}`} />
             ))}
           </>
         )}
-        {groupedData.editor.length > 0 && (
+        {!loading && groupedData.editor.length > 0 && (
           <>
             <h2 className="text-gray-500 text-sm font-semibold">
               Shared with me
             </h2>
             {groupedData.editor.map((doc) => (
-             <SidebarOption key={doc.id} id={doc.id} href={`/doc/${doc.id}`} />
+              <SidebarOption key={doc.id} id={doc.id} href={`/doc/${doc.id}`} />
             ))}
           </>
         )}
+        {
+          loading &&  (
+            <LoadingSpinner />
+          )
+        }
       </div>
     </>
   );
