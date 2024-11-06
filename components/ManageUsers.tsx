@@ -17,6 +17,7 @@ import { useRoom } from "@liveblocks/react/suspense";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { collectionGroup, query, where } from "firebase/firestore";
 import { db } from "@/firebase";
+import { LoaderIcon, TrashIcon } from "lucide-react";
 
 const ManageUsers = () => {
   const { user } = useUser();
@@ -76,7 +77,7 @@ const ManageUsers = () => {
                         disabled={isPending}
                         size="icon"
                         >
-                        {isPending ? "Removing..." : "X"}
+                        {isPending ? <LoaderIcon className="animate-spin"/> : <TrashIcon />}
                         </Button>
                     )
                 }

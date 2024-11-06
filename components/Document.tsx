@@ -36,11 +36,11 @@ const Document = ({ id }: { id: string }) => {
     }
   },[data])
   return (
-    <div className="flex-1 h-full bg-white  p-5">
+    <div className="flex-1 h-full bg-white md:p-5 max-sm:p-2">
       <div className="flex max-w-6xl mx-auto justify-between pb-5 "> 
-        <form className="flex flex-1 space-x-2" onSubmit={updateTitle}>
+        <form className="md:flex flex-1 space-x-2" onSubmit={updateTitle}>
           {/* update title*/}
-          <Input value={input} onChange={(e) => setInput(e.target.value)} />
+          <Input className="max-sm:mb-2" value={input} onChange={(e) => setInput(e.target.value)} />
           <Button disabled={isUpdating} type="submit">
             {isUpdating ? "Updating..." : "Update"}
           </Button>
@@ -52,7 +52,7 @@ const Document = ({ id }: { id: string }) => {
           )}
         </form>
       </div>
-      <div className="flex max-w-6xl mx-auto justify-between items-center mb-5">
+      <div className="md:flex max-w-6xl mx-auto justify-between items-center mb-5">
         <ManageUsers />
         <Avatars />
       </div>

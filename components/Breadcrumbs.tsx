@@ -22,7 +22,9 @@ const Breadcrumbs = () => {
   const isHomePage = segments.length === 0;
 
   const [data] = useDocumentData(
-    segments.length > 0 ? doc(db, "documents", segments[segments.length - 1]) : null
+    segments.length > 0
+      ? doc(db, "documents", segments[segments.length - 1])
+      : null
   );
 
   useEffect(() => {
@@ -36,32 +38,34 @@ const Breadcrumbs = () => {
   }
 
   return (
-    <Breadcrumb>
-      <BreadcrumbList>
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/">Home</BreadcrumbLink>
-        </BreadcrumbItem>
-        {segments.map((segment, index) => {
-          let href = `/${segments.slice(0, index + 1).join("/")}`;
-          const isLast = index === segments.length - 1;
-          if (segment === "doc"){
-            href = "/"
-          }
-          return (
-            <Fragment key={segment}>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                {isLast ? (
-                  <BreadcrumbPage>{documentTitle || segment}</BreadcrumbPage>
-                ) : (
-                  <BreadcrumbLink href={href}>{segment}</BreadcrumbLink>
-                )}
-              </BreadcrumbItem>
-            </Fragment>
-          );
-        })}
-      </BreadcrumbList>
-    </Breadcrumb>
+    <div className="max-sm:hidden">
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+          </BreadcrumbItem>
+          {segments.map((segment, index) => {
+            let href = `/${segments.slice(0, index + 1).join("/")}`;
+            const isLast = index === segments.length - 1;
+            if (segment === "doc") {
+              href = "/";
+            }
+            return (
+              <Fragment key={segment}>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  {isLast ? (
+                    <BreadcrumbPage>{documentTitle || segment}</BreadcrumbPage>
+                  ) : (
+                    <BreadcrumbLink href={href}>{segment}</BreadcrumbLink>
+                  )}
+                </BreadcrumbItem>
+              </Fragment>
+            );
+          })}
+        </BreadcrumbList>
+      </Breadcrumb>
+    </div>
   );
 };
 

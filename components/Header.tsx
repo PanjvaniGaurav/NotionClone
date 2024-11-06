@@ -8,6 +8,7 @@ import {
   useUser,
 } from "@clerk/nextjs";
 import Breadcrumbs from "./Breadcrumbs";
+import Link from "next/link";
 
 const Header = () => {
   const { user } = useUser();
@@ -15,9 +16,11 @@ const Header = () => {
   return (
     <div className="flex justify-between items-center p-5">
       {user && (
-        <h1 className="text-2xl">
-          {user?.firstName} {`'s Space`}
-        </h1>
+        <Link href="/">
+          <h1 className="text-2xl">
+            {user?.firstName} {`'s Space`}
+          </h1>
+        </Link>
       )}
       <Breadcrumbs />
       <div>

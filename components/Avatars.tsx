@@ -14,8 +14,9 @@ const Avatars = () => {
   const self = useSelf();
   const all = [self, ...others];
   return (
-    <div className="flex gap-2 items-center">
-      <p className="font-light text-sm">Users currently editing the document</p>
+    <div className="flex max-sm:justify-end gap-2 items-center">
+      <p className="max-sm:hidden font-light text-sm">Users currently editing the document</p>
+      <p className="">Users Editing Doc</p>
       <div className="flex -space-x-5">
         {all.map((other, i) => (
           <TooltipProvider key={other?.id + i}>
